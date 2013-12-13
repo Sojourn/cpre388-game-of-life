@@ -1,8 +1,17 @@
 package edu.iastate.gameoflife;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.util.Scanner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.provider.MediaStore.Files;
 
 public class GOLUtil {
 	private static final String width_tag = "width";
@@ -46,6 +55,16 @@ public class GOLUtil {
 
 			return model;
 		} catch (JSONException e) {
+			return null;
+		}
+	}
+	
+	public static String readFile(File file) {
+		
+		try {
+			Scanner in = new Scanner(file);
+			return in.useDelimiter("\\A").next();
+		} catch (FileNotFoundException e) {
 			return null;
 		}
 	}

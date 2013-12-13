@@ -5,30 +5,29 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.ScaleGestureDetector.OnScaleGestureListener;
 
 public class GOLView extends View implements GOLModel.ModelChangeListener,
 		View.OnTouchListener {
 	private static final int CELL_RADIUS = 32;
 	private static final int CELL_DIAMETER = 2 * CELL_RADIUS;
 	private static final Paint CELL_PAINT = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-	private final GOLModel model;
+	private GOLModel model;
 
 	public GOLView(GOLModel model, Context context) {
 		super(context);
 		setOnTouchListener(this);
+		
+		setModel(model);
+	}
 
+	void setModel(GOLModel model) {
 		this.model = model;
 		setMinimumWidth(model.getWidth() * CELL_DIAMETER);
 		setMinimumHeight(model.getHeight() * CELL_DIAMETER);
 	}
-
+	
 	@Override
 	public void onChange() {
 		invalidate();
@@ -75,7 +74,6 @@ public class GOLView extends View implements GOLModel.ModelChangeListener,
 			model.toggleCell(x, y);
 			onCellChange(x, y);
 			return true;
-
 		}
 
 		return false;

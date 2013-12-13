@@ -17,6 +17,13 @@ public class GOLModel {
 		this.board = new boolean[height][width];
 		this.temp = new boolean[height][width];
 	}
+	
+	public GOLModel(boolean[][] board){
+		this.width = board[0].length;
+		this.height = board.length;
+		this.board = board;
+		this.temp = new boolean[height][width];
+	}
 
 	public int getWidth() {
 		return width;
@@ -24,6 +31,10 @@ public class GOLModel {
 
 	public int getHeight() {
 		return height;
+	}
+	
+	public boolean[][] getBoard() {
+		return board;
 	}
 
 	public boolean getCell(int x, int y) {
